@@ -21,6 +21,23 @@ const theme = extendTheme({
     }
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        'html, body, & *': {
+          '&::-webkit-scrollbar': {
+            width: '8px',
+            height: '8px'
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#bdc3c7',
+            borderRadius: '8px'
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#00b894'
+          }
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -30,7 +47,7 @@ const theme = extendTheme({
     },
     MuiInputLabel: {
       styleOverrides: {
-        root: ({ theme }) => ({ 
+        root: ({ theme }) => ({
           color: theme.palette.primary.main,
           fontSize: '0.875rem'
         })
