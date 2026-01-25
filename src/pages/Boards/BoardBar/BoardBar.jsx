@@ -1,4 +1,3 @@
-
 import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import DashboardIcon from '@mui/icons-material/Dashboard'
@@ -38,7 +37,6 @@ const BoardBar = () => {
       paddingX: 2,
       gap: 2,
       overflowX: 'auto',
-      borderBottom: '1px solid white',
       bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2' ),
       '&::-webkit-scrollbar-track': {
         m: 2
