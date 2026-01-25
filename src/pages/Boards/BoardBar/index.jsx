@@ -39,7 +39,10 @@ const BoardBar = () => {
       gap: 2,
       overflowX: 'auto',
       borderBottom: '1px solid white',
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2' )
+      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2' ),
+      '&::-webkit-scrollbar-track': {
+        m: 2
+      }
     }}>
       <Box sx={{ diBottomsplay: 'flex', alignItems: 'center', gap: 2 }}>
         <Chip
@@ -93,27 +96,30 @@ const BoardBar = () => {
               width: 34,
               height: 34,
               fontSize: 16,
-              border: 'none'
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
+              '&:first-of-type': { bgcolor: '#a4b0be' }
             }
           }}
         >
           <Tooltip title="Remy Sharp">
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt="Remy Sharp" src="https://avatars.githubusercontent.com/u/168968514?v=4" />
           </Tooltip>
           <Tooltip title="Travis Howard">
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Travis Howard" src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" />
           </Tooltip>
           <Tooltip title="Cindy Baker">
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+            <Avatar alt="Cindy Baker" src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" />
           </Tooltip>
           <Tooltip title="Agnes Walker">
-            <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+            <Avatar alt="Agnes Walker" src="https://avatars.githubusercontent.com/u/168968514?v=4" />
           </Tooltip>
           <Tooltip title="Agnes Walker">
-            <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+            <Avatar alt="Agnes Walker" src="https://avatars.githubusercontent.com/u/168968514?v=4" />
           </Tooltip>
           <Tooltip title="Agnes Walker">
-            <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+            <Avatar alt="Agnes Walker" src="https://avatars.githubusercontent.com/u/168968514?v=4" />
           </Tooltip>
         </AvatarGroup>
       </Box>
@@ -122,4 +128,3 @@ const BoardBar = () => {
 }
 
 export default BoardBar
-
