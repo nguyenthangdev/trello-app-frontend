@@ -23,7 +23,7 @@ const ListCards = ({ cards }) => {
         backgroundColor: '#bfc2cf'
       }
     }}>
-      {cards?.map(card => <Card key={Card._id} card={card} />)}
+      {cards?.map(card => <Card key={card._id} card={card} />)}
     </Box>
   )
 }

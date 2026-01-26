@@ -72,7 +72,7 @@ const AppBar = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           InputProps={{
             startAdornment: (
-              <InputAdornment positinon='start'>
+              <InputAdornment position='start'>
                 <SearchIcon sx={{ color: 'white' }}/>
               </InputAdornment>
             ),
