@@ -5,7 +5,6 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 
 const ListColumns = ({ columns }) => {
-
   return (
     <SortableContext items={columns?.map(c => c._id)} strategy={horizontalListSortingStrategy}>
       <Box sx={{
@@ -15,12 +14,9 @@ const ListColumns = ({ columns }) => {
         display: 'flex',
         overflowX: 'auto',
         overflowY: 'hidden',
-        '&::-webkit-scrollbar-track': {
-          m: 2
-        }
+        '&::-webkit-scrollbar-track': { m: 2 }
       }}>
         {columns?.map(column => <Column key={column._id} column={column} />)}
-
         <Box sx={{
           minWidth: '200px',
           maxWidth: '200px',
@@ -39,12 +35,11 @@ const ListColumns = ({ columns }) => {
               py: 1
             }}
           >
-          Add new column
+            Add new column
           </Button>
         </Box>
       </Box>
     </SortableContext>
-
   )
 }
 
