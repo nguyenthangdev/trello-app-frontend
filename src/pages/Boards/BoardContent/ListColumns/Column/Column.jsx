@@ -28,7 +28,7 @@ const Column = ({ column }) => {
   })
 
   const dndKitColumnStyles = {
-    touchAction: 'none', // Dành cho sensor default dạng PointerSensor
+    // touchAction: 'none', // Dành cho sensor default dạng PointerSensor
     // Phải chuyển sang CSS.Translate, nếu dùng CSS.Transform như docs sẽ lỗi kiểu stretch
     transform: CSS.Translate.toString(transform),
     transition,
@@ -44,7 +44,7 @@ const Column = ({ column }) => {
 
   const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
 
-  // Phải bọc div ở đây vì vấn đề chiều cao của column khi kéo thả sẽ có bug kiểu kiểu flickering
+  // Phải bọc div ở đây vì vấn đề chiều cao của column khi kéo thả sẽ có bug kiểu kiểu flickering (nhấp nháy)
   return (
     <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
       <Box
@@ -52,7 +52,7 @@ const Column = ({ column }) => {
         sx={{
           minWidth: '300px',
           maxWidth: '300px',
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0' ),
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
           ml: 2,
           borderRadius: '6px',
           height: 'fit-content',
