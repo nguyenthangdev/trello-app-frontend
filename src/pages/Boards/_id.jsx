@@ -11,11 +11,12 @@ const Board = () => {
   const [board, setBoard] = useState(null)
 
   useEffect(() => {
-    const boardId = '697da345cb937eb553057aae'
+    const boardId = '697e1c3f5d8f760772cee900'
     fetchBoardDetailsAPI(boardId).then(board => {
       setBoard(board)
     })
   }, [])
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
       <AppBar />
