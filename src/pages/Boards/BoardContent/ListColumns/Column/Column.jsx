@@ -17,14 +17,13 @@ import AddCardIcon from '@mui/icons-material/AddCard'
 import Button from '@mui/material/Button'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import ListCards from './ListCards/ListCards'
-import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 
-const Column = ({ column }) => {
+const Column = ({ column,createNewCard }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
     data: { ...column }
@@ -45,7 +44,7 @@ const Column = ({ column }) => {
   const handleClick = (event) => setAnchorEl(event.currentTarget)
   const handleClose = () => setAnchorEl(null)
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+  const orderedCards = column.cards
 
   const [openNewCardForm, setOpenNewCardForm] = useState(false)
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
@@ -53,9 +52,16 @@ const Column = ({ column }) => {
 
   const addNewCard = () => {
     if (!newCardTitle) {
-      toast.error('Please enter card title!', {position: 'bottom-right'})
+      toast.error('Please enter card title!', { position: 'bottom-right' })
       return
     }
+
+    const newCardData = {
+      title: newCardTitle,
+      columnId: column._id
+    }
+
+    createNewCard(newCardData)
     toggleOpenNewCardForm()
     setNewCardTitle('')
   }
@@ -157,7 +163,7 @@ const Column = ({ column }) => {
                 onClick={toggleOpenNewCardForm}
                 startIcon={<AddCardIcon />}
               >
-              Add new card
+                Add new card
               </Button>
               <Tooltip title="Drag to move">
                 <DragHandleIcon sx={{ cursor: 'pointer' }} />
