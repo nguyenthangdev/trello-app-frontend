@@ -33,7 +33,8 @@ const BoardContent = ({
   createNewCard,
   moveColumns,
   moveCardInTheSameColumn,
-  moveCardToDifferentColumn
+  moveCardToDifferentColumn,
+  deleteColumnDetails
 }) => {
   // Nếu dùng PointerSensor mặc định thì phải kết hợp thuộc tính CSS touch-action:none ở những phần tử kéo thả. Nhưng còn bug
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
@@ -163,21 +164,21 @@ const BoardContent = ({
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) return
 
     // Còn nếu kéo card thì xử lý thêm để có thể kéo card qua lại giữa các columns
-    console.log('handleDragOver: ', event)
+    // console.log('handleDragOver: ', event)
     const { active, over } = event
 
     // Cần đảm bảo nếu không tồn tại active hoặc over (khi kéo ra khỏi phạm vi container) thì không làm gì cả (tránh crash trang)
     if (!active || !over) return
-    console.log('vao day cua over!')
+    // console.log('vao day cua over!')
     // activeDraggingCard: là cái card đang đc kéo
     const { id: activeDraggingCardId, data: { current: activeDraggingCardData } } = active
     const { id: overCardId } = over
 
     // Tìm 2 cái column theo cardId
     const activeColumn = findColumnByCardId(activeDraggingCardId)
-    console.log('activeColumn: ', activeColumn)
+    // console.log('activeColumn: ', activeColumn)
     const overColumn = findColumnByCardId(overCardId)
-    console.log('overColumn: ', overColumn)
+    // console.log('overColumn: ', overColumn)
 
     if (!activeColumn || !overColumn) return
 
@@ -200,15 +201,15 @@ const BoardContent = ({
   // Trigger khi kết thúc hành động kéo 1 phần tử (nghĩa là hành động thả (drop))
   const handleDragEnd = (event) => {
     const { active, over } = event
-    console.log('handleDragEnd: ', event)
+    // console.log('handleDragEnd: ', event)
     // Cần đảm bảo nếu không tồn tại active hoặc over (khi kéo ra khỏi phạm vi container) thì không làm gì cả (tránh crash trang)
     if (!active || !over) return
-    console.log('vao day cua end!')
+    // console.log('vao day cua end!')
     // Xử ly kéo thả card
-    console.log('activeDragItemType: ', activeDragItemType)
+    // console.log('activeDragItemType: ', activeDragItemType)
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) {
-      console.log('active from handleDragEnd: ', active)
-      console.log('over from handleDragEnd: ', over)
+      // console.log('active from handleDragEnd: ', active)
+      // console.log('over from handleDragEnd: ', over)
       // activeDraggingCard: là cái card đang đc kéo
       const { id: activeDraggingCardId, data: { current: activeDraggingCardData } } = active
       const { id: overCardId } = over
@@ -218,8 +219,8 @@ const BoardContent = ({
       const overColumn = findColumnByCardId(overCardId)
 
       if (!activeColumn || !overColumn) return
-      console.log('activeDragItemData: ', activeDragItemData)
-      console.log('oldColumnWhenDraggingCard: ', oldColumnWhenDraggingCard)
+      // console.log('activeDragItemData: ', activeDragItemData)
+      // console.log('oldColumnWhenDraggingCard: ', oldColumnWhenDraggingCard)
 
       // Hành động kéo thả card giữa 2 column khác nhau
       // Phải dùng tới activeDragItemData.columnId hoặc oldColumnWhenDraggingCard._id (set vào state từ bước handleDragStart) chứ không phải activeData trong scope handeDragEnd này vì sau khi đi qua onDragOver tới đây là state của card đã bị cập nhật 1 lần rồi.
@@ -351,6 +352,7 @@ const BoardContent = ({
           columns={orderedColumns}
           createNewColumn={createNewColumn}
           createNewCard={createNewCard}
+          deleteColumnDetails={deleteColumnDetails}
         />
         <DragOverlay dropAnimation={customDropAnimation}>
           {(!activeDragItemType) && null}
