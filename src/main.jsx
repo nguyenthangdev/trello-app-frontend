@@ -1,5 +1,4 @@
 import CssBaseline from '@mui/material/CssBaseline'
-// import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from '~/App.jsx'
 import theme from '~/theme'
@@ -13,9 +12,7 @@ import { store } from '~/redux/store'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <CssVarProvider theme={theme}>
-      <ConfirmProvider defaultOptions={{
-        allowClose: false
-      }}>
+      <ConfirmProvider defaultOptions={{ allowClose: false }}>
         <CssBaseline />
         <App />
         <ToastContainer position="bottom-left" theme="colored"/>

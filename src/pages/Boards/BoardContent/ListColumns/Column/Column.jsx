@@ -23,8 +23,18 @@ import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 import { useConfirm } from 'material-ui-confirm'
+import { cloneDeep } from 'lodash'
+import {
+  updateCurrentActiveBoard,
+  selectCurrentActiveBoard
+} from '~/redux/activeBoard/activeBoardSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { createNewCardAPI, deleteColumnDetailsAPI } from '~/apis'
 
-const Column = ({ column, createNewCard, deleteColumnDetails }) => {
+const Column = ({ column }) => {
+  const dispatch = useDispatch()
+  const board = useSelector(selectCurrentActiveBoard)
+
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
     data: { ...column }
@@ -51,7 +61,7 @@ const Column = ({ column, createNewCard, deleteColumnDetails }) => {
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
   const [newCardTitle, setNewCardTitle] = useState('')
 
-  const addNewCard = () => {
+  const addNewCard = async () => {
     if (!newCardTitle) {
       toast.error('Please enter card title!', { position: 'bottom-right' })
       return
@@ -62,7 +72,30 @@ const Column = ({ column, createNewCard, deleteColumnDetails }) => {
       columnId: column._id
     }
 
-    createNewCard(newCardData)
+    const createdCard = await createNewCardAPI({
+      ...newCardData,
+      boardId: board._id
+    })
+
+    // const newBoard = { ...board }
+    const newBoard = cloneDeep(board)
+    const columnToUpdate = newBoard.columns.find(c => c._id === createdCard.columnId)
+
+    if (columnToUpdate) {
+      // Nếu mảng chửa 1 FE_PlaceholderCard thì xóa nó đi mà thêm card mới thế chỗ nó luôn
+      if (columnToUpdate.cards.some(c => c.FE_PlaceholderCard)) {
+        columnToUpdate.cards = [createdCard]
+        columnToUpdate.cardOrderIds = [createdCard._id]
+      } else {
+        // Còn lại thì push vào cuối như bình thường
+        columnToUpdate.cards.push(createdCard)
+        columnToUpdate.cardOrderIds.push(createdCard._id)
+      }
+    }
+
+    // setBoard(newBoard)
+    dispatch(updateCurrentActiveBoard(newBoard))
+
     toggleOpenNewCardForm()
     setNewCardTitle('')
   }
@@ -75,7 +108,17 @@ const Column = ({ column, createNewCard, deleteColumnDetails }) => {
       description: 'This action will permanently delete your column and its Cards? Are you sure?',
       allowClose: false
     }).then(() => {
-      deleteColumnDetails(column._id)
+      // Tương tự đoạn xử lý chỗ hàm moveColumns nên ko ảnh hưởng Redux Toolkit Immutability gì ở đây cả.
+      const newBoard = { ...board }
+      newBoard.columns = newBoard.columns.filter(c => c._id !== column._id)
+      newBoard.columnOrderIds = newBoard.columnOrderIds.filter(_id => _id !== column._id)
+
+      // setBoard(newBoard)
+      dispatch(updateCurrentActiveBoard(newBoard))
+
+      deleteColumnDetailsAPI(column._id).then(res => {
+        toast.success(res?.deletedResult)
+      })
     }).catch()
   }
 

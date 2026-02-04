@@ -23,9 +23,9 @@ export const fetchBoardDetailsAPI = createAsyncThunk(
 export const activeBoardSlice = createSlice({
   name: 'activeBoard',
   initialState,
-  // Reducers: Nơi xử lý dữ liệu đồng bộ
+  // reducers: Nơi xử lý dữ liệu đồng bộ
   reducers: {
-    // Luu ý luôn là ở đây luôn luôn cần cặp ngoặc nhọn cho function trong reducer cho dù code bên trong chỉ có 1 dòng, đây là rule của redux
+    // Luu ý luôn là, ở đây luôn luôn cần cặp ngoặc nhọn cho function trong reducer cho dù code bên trong chỉ có 1 dòng, đây là rule của Redux.
     updateCurrentActiveBoard: (state, action) => {
       // action.payload là chuẩn đặt tên nhận dữ liệu vào reducer ở đây chúng ta gán nó ra 1 biến có ý nghĩa hơn
       let board = action.payload
@@ -37,7 +37,7 @@ export const activeBoardSlice = createSlice({
       state.currentActiveBoard = board
     }
   },
-  // ExtraReducers: Nơi xử lý dữ liệu bất đồng bộ
+  // extraReducers: Nơi xử lý dữ liệu bất đồng bộ
   extraReducers: (builder) => {
     builder.addCase(fetchBoardDetailsAPI.fulfilled, (state, action) => {
       // action.payload ở đây chính là cái response.data trả về ở trên
@@ -62,7 +62,7 @@ export const activeBoardSlice = createSlice({
   }
 })
 
-// Actions: là nơi dành cho các components bên dưới, gọi bằng dispatch() tới nó để cập nhật lại dư liệu thông qua reducer (chạy đồng bộ)
+// actions: là nơi dành cho các components bên dưới, gọi bằng dispatch() tới nó để cập nhật lại dư liệu thông qua reducer (chạy đồng bộ)
 // Để ý ở trên thì không thấy properties actions đâu cả, bởi vì những cái actions này đơn giản là đc thằng redux tạo tự động theo tên của reducer.
 export const { updateCurrentActiveBoard } = activeBoardSlice.actions
 
@@ -71,6 +71,6 @@ export const selectCurrentActiveBoard = (state) => {
   return state.activeBoard.currentActiveBoard
 }
 
-// Cái file này tên là activeBoardSlide nhưng chúng ta sẽ export 1 thứ tên là Reducer
+// Cái file này tên là activeBoardSlide nhưng chúng ta sẽ export 1 thứ tên là reducer
 // export default activeBoardSlice.reducer
 export const activeBoardReducer = activeBoardSlice.reducer
