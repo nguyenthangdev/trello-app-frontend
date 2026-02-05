@@ -8,15 +8,18 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ConfirmProvider } from 'material-ui-confirm'
 import { Provider } from 'react-redux'
 import { store } from '~/redux/store'
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <CssVarProvider theme={theme}>
-      <ConfirmProvider defaultOptions={{ allowClose: false }}>
-        <CssBaseline />
-        <App />
-        <ToastContainer position="bottom-left" theme="colored"/>
-      </ConfirmProvider>
-    </CssVarProvider>
-  </Provider>
+  <BrowserRouter basename='/'>
+    <Provider store={store}>
+      <CssVarProvider theme={theme}>
+        <ConfirmProvider defaultOptions={{ allowClose: false }}>
+          <CssBaseline />
+          <App />
+          <ToastContainer position="bottom-left" theme="colored"/>
+        </ConfirmProvider>
+      </CssVarProvider>
+    </Provider>
+  </BrowserRouter>
 )

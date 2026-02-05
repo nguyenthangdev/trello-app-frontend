@@ -20,6 +20,7 @@ import {
   selectCurrentActiveBoard
 } from '~/redux/activeBoard/activeBoardSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 const Board = () => {
   const dispatch = useDispatch()
@@ -27,8 +28,10 @@ const Board = () => {
   // const [board, setBoard] = useState(null)
   const board = useSelector(selectCurrentActiveBoard)
 
+  const { boardId } = useParams()
+
   useEffect(() => {
-    const boardId = '697e1c3f5d8f760772cee900'
+    // const boardId = '697e1c3f5d8f760772cee900'
     dispatch(fetchBoardDetailsAPI(boardId))
     // fetchBoardDetailsAPI(boardId).then(board => {
     //   // Sắp xếp thứ tự các column luôn ở đây trc khi đưa dữ liệu xuống bên dưới các component con (fix lỗi kéo card trong column bị nhảy sai thứ tự khi kéo lần đầu tiên)
@@ -45,7 +48,7 @@ const Board = () => {
     //   })
     //   setBoard(board)
     // })
-  }, [dispatch])
+  }, [dispatch, boardId])
 
   const moveColumns = (dndOrderedColumns) => {
     const dndOrderedColumnsIds = dndOrderedColumns.map(c => c._id)
