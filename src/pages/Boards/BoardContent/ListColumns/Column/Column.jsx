@@ -119,7 +119,7 @@ const Column = ({ column }) => {
       deleteColumnDetailsAPI(column._id).then(res => {
         toast.success(res?.deletedResult)
       })
-    }).catch()
+    }).catch(() => {})
   }
 
   // Phải bọc div ở đây vì vấn đề chiều cao của column khi kéo thả sẽ có bug kiểu kiểu flickering (nhấp nháy)
