@@ -13,6 +13,7 @@ import Logout from '@mui/icons-material/Logout'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCurrentUser, logoutUserAPI } from '~/redux/user/userSlide'
 import { useConfirm } from 'material-ui-confirm'
+import { Link } from 'react-router-dom'
 
 const Profiles = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -67,17 +68,19 @@ const Profiles = () => {
           'aria-labelledby': 'basic-button-profiles'
         }}
       >
-        <MenuItem
-          sx={{
-            '&:hover': { color: 'success.light' }
-          }}
-        >
-          <Avatar
-            sx={{ width: 28, height: 28, mr: 2 }}
-            alt='Avatar test'
-            src={currentUser?.avatar}
-          /> Profile
-        </MenuItem>
+        <Link to="/settings/account" style={{ color: 'inherit' }}>
+          <MenuItem
+            sx={{
+              '&:hover': { color: 'success.light' }
+            }}
+          >
+            <Avatar
+              sx={{ width: 28, height: 28, mr: 2 }}
+              alt='Avatar test'
+              src={currentUser?.avatar}
+            /> Profile
+          </MenuItem>
+        </Link>
         <MenuItem>
           <Avatar sx={{ width: 28, height: 28, mr: 2 }} /> My account
         </MenuItem>

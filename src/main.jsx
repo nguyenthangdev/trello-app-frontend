@@ -1,11 +1,12 @@
 import CssBaseline from '@mui/material/CssBaseline'
+import GlobalStGlobyles from '@mui/material/GlobalStyles'
+import { Experimental_CssVarsProvider as CssVarProvider } from '@mui/material/styles'
+import { ConfirmProvider } from 'material-ui-confirm'
 import ReactDOM from 'react-dom/client'
 import App from '~/App.jsx'
 import theme from '~/theme'
-import { Experimental_CssVarsProvider as CssVarProvider } from '@mui/material/styles'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { ConfirmProvider } from 'material-ui-confirm'
 import { Provider } from 'react-redux'
 import { store } from '~/redux/store'
 import { BrowserRouter } from 'react-router-dom'
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate persistor={persistor}>
         <CssVarProvider theme={theme}>
           <ConfirmProvider defaultOptions={{ allowClose: false }}>
+            <GlobalStGlobyles styles={{ a: { textDecoration: 'none' } }}/>
             <CssBaseline />
             <App />
             <ToastContainer position="bottom-left" theme="colored"/>
