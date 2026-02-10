@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Routes>
       <Route path='/' element={
-        <Navigate to="boards/697e1c3f5d8f760772cee900" replace={true}/>
+        <Navigate to="boards" replace={true}/>
       } />
       <Route element={<ProtectedRoute user={currentUser}/>}>
         <Route path='/boards/:boardId' element={<Board />} />
