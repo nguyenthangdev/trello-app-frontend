@@ -35,6 +35,22 @@ export const activeBoardSlice = createSlice({
 
       // Update lại dữ liệu của currentActiveBoard
       state.currentActiveBoard = board
+    },
+    updateCardInBoard: (state, action) => {
+      // Update nested data
+      const incomingCard = action.payload
+
+      // Tìm dần từ board -> column -> card
+      const column = state.currentActiveBoard.columns.find(column => column._id === incomingCard.columnId)
+      if (column) {
+        const card = column.cards.find(card => card._id === incomingCard._id)
+        if (card) {
+          // card.title = incomingCard.title
+          Object.keys(incomingCard).forEach(key => {
+            card[key] = incomingCard[key]
+          })
+        }
+      }
     }
   },
   // extraReducers: Nơi xử lý dữ liệu bất đồng bộ
@@ -42,6 +58,9 @@ export const activeBoardSlice = createSlice({
     builder.addCase(fetchBoardDetailsAPI.fulfilled, (state, action) => {
       // action.payload ở đây chính là cái response.data trả về ở trên
       let board = action.payload
+
+      // Gộp owners và members lại
+      board.FE_allUsers = board.owners.concat(board.members)
 
       // Sắp xếp thứ tự các column luôn ở đây trc khi đưa dữ liệu xuống bên dưới các component con (fix lỗi kéo card trong column bị nhảy sai thứ tự khi kéo lần đầu tiên)
       board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
@@ -64,7 +83,7 @@ export const activeBoardSlice = createSlice({
 
 // actions: là nơi dành cho các components bên dưới, gọi bằng dispatch() tới nó để cập nhật lại dư liệu thông qua reducer (chạy đồng bộ)
 // Để ý ở trên thì không thấy properties actions đâu cả, bởi vì những cái actions này đơn giản là đc thằng redux tạo tự động theo tên của reducer.
-export const { updateCurrentActiveBoard } = activeBoardSlice.actions
+export const { updateCurrentActiveBoard, updateCardInBoard } = activeBoardSlice.actions
 
 // Selectors: là nơi dành cho components bên dưới gọi bằng hook useSelector() để lấy dữ liệu trong kho redux store ra sử dụng
 export const selectCurrentActiveBoard = (state) => {
