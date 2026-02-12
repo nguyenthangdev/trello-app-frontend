@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { activeBoardReducer } from '~/redux/activeBoard/activeBoardSlice'
-import { userReducer } from '~/redux/user/userSlide'
 import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // default là localstorage
-import { activeCardReducer } from '~/redux/activeCard/activeCardSlide'
+import { activeBoardReducer } from './activeBoard/activeBoardSlice'
+import { userReducer } from './user/userSlide'
+import { activeCardReducer } from './activeCard/activeCardSlide'
+import { notificationsReducer } from './notifications/notificatonsSlide'
 
 const rootPersistConfig = {
   key: 'root', // key của cái persist do chúng ta chỉ định, cứ để mặc định là root
@@ -17,10 +18,11 @@ const rootPersistConfig = {
 const reducers = combineReducers({
   activeBoard: activeBoardReducer,
   user: userReducer,
-  activeCard: activeCardReducer
+  activeCard: activeCardReducer,
+  notifications: notificationsReducer
 })
 
-// Thực hiện persist Reducer
+// Thực hiện persist Reducer (Lưu biến vào localstorage)
 const persistedReducer = persistReducer(rootPersistConfig, reducers)
 
 export const store = configureStore({

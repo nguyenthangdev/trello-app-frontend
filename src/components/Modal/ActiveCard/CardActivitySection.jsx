@@ -55,8 +55,8 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
         <Typography sx={{ pl: '45px', fontSize: '14px', fontWeight: '500', color: '#b1b1b1' }}>No activity found!</Typography>
       }
       {cardComments.map((comment, index) =>
-        <Box sx={{ display: 'flex', gap: 1, width: '100%', mb: 1.5 }} key={comment._id}>
-          <Tooltip title="trungquandev">
+        <Box sx={{ display: 'flex', gap: 1, width: '100%', mb: 1.5 }} key={index}>
+          <Tooltip title={comment?.userDisplayName}>
             <Avatar
               sx={{ width: 36, height: 36, cursor: 'pointer' }}
               alt={comment?.userAvatar}

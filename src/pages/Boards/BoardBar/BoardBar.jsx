@@ -7,8 +7,8 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { Tooltip } from '@mui/material'
 import { capitalizeFirstLetter } from '~/utils/formatter'
-import BoardUserGroup from '~/pages/Boards/BoardBar/BoardUserGroup'
-import InviteBoardUser from '~/pages/Boards/BoardBar/InviteBoardUser'
+import BoardUserGroup from './BoardUserGroup'
+import InviteBoardUser from './InviteBoardUser'
 
 const MENU_STYLES = {
   color: 'white',

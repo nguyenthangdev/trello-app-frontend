@@ -37,7 +37,7 @@ export const updateUserAPI = createAsyncThunk(
 )
 
 // Khởi tạo 1 cái Slide trong kho lưu trữ Redux Store
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   // reducers: Nơi xử lý dữ liệu đồng bộ

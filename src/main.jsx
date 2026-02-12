@@ -21,9 +21,9 @@ import { injectStore } from '~/utils/authorizeAxios'
 injectStore(store)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename='/'>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <BrowserRouter basename='/'>
         <CssVarProvider theme={theme}>
           <ConfirmProvider defaultOptions={{ allowClose: false }}>
             <GlobalStGlobyles styles={{ a: { textDecoration: 'none' } }}/>
@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <ToastContainer position="bottom-left" theme="colored"/>
           </ConfirmProvider>
         </CssVarProvider>
-      </PersistGate>
-    </Provider>
-  </BrowserRouter>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 )

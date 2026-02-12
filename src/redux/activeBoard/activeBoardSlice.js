@@ -20,7 +20,7 @@ export const fetchBoardDetailsAPI = createAsyncThunk(
 )
 
 // Khởi tạo 1 cái Slide trong kho lưu trữ Redux Store
-export const activeBoardSlice = createSlice({
+const activeBoardSlice = createSlice({
   name: 'activeBoard',
   initialState,
   // reducers: Nơi xử lý dữ liệu đồng bộ

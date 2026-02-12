@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import Check from '@mui/icons-material/Check';
+import Check from '@mui/icons-material/Check'
 
 const Templates = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
