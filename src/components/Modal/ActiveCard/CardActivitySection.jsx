@@ -15,15 +15,14 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
     // Bắt hành động người dùng nhấn phím Enter && không phải hành động Shift + Enter
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault() // Thêm dòng này để khi Enter không bị nhảy dòng
-      if (!event.target?.value) return // Nếu không có giá trị gì thì return không làm gì cả
+      if (!event.target?.value) return
 
-      // Tạo một biến commend data để gửi api
       const commentToAdd = {
         userAvatar: currentUser?.avatar,
         userDisplayName: currentUser?.displayName,
         content: event.target.value.trim()
       }
-      console.log(commentToAdd)
+      // console.log(commentToAdd)
       // Gọi lên Props ở component cha
       onAddCardComment(commentToAdd).then(() => {
         event.target.value = ''
@@ -37,7 +36,7 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
         <Avatar
           sx={{ width: 36, height: 36, cursor: 'pointer' }}
-          alt="trungquandev"
+          alt={currentUser?.displayName}
           src={currentUser?.avatar}
         />
         <TextField

@@ -22,11 +22,10 @@ function AccountTab() {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
 
-  // Những thông tin của user để init vào form (key tương ứng với register phía dưới Field)
   const initialGeneralForm = {
     displayName: currentUser?.displayName
   }
-  // Sử dụng defaultValues để set giá trị mặc định cho các field cần thiết
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: initialGeneralForm
   })
@@ -34,7 +33,6 @@ function AccountTab() {
   const submitChangeGeneralInformation = (data) => {
     const { displayName } = data
 
-    // Nếu không có sự thay đổi gì về displayname thì không làm gì cả
     if (displayName === currentUser?.displayName) return
 
     toast.promise(
@@ -59,13 +57,11 @@ function AccountTab() {
     // Sử dụng FormData để xử lý dữ liệu liên quan tới file khi gọi API
     let reqData = new FormData()
     reqData.append('avatar', e.target?.files[0])
-    // // Cách để log được dữ liệu thông qua FormData
     // console.log('reqData: ', reqData)
     // for (const value of reqData.values()) {
     //   console.log('reqData Value: ', value)
     // }
 
-    // Gọi API...
     toast.promise(
       dispatch(updateUserAPI(reqData)),
       { pending: 'Updating...' }
@@ -98,7 +94,7 @@ function AccountTab() {
           <Box>
             <Avatar
               sx={{ width: 84, height: 84, mb: 1 }}
-              alt="TrungQuanDev"
+              alt={currentUser?.displayName}
               src={currentUser?.avatar}
             />
             <Tooltip title="Upload a new image to update your avatar immediately.">

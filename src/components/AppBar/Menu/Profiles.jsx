@@ -28,7 +28,6 @@ const Profiles = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
 
-
   const confirmLogout = useConfirm()
 
   const handleLogout = () => {

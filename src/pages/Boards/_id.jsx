@@ -3,7 +3,6 @@ import Container from '@mui/material/Container'
 import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
-// import { mockData } from '~/apis/mock-data'
 import { useEffect } from 'react'
 import {
   updateBoardDetailsAPI,
@@ -23,28 +22,11 @@ import ActiveCard from '~/components/Modal/ActiveCard/ActiveCard'
 
 const Board = () => {
   const dispatch = useDispatch()
-  // Không dùng State của component nữa mà chuyển qua dùng State của Redux
-  // const [board, setBoard] = useState(null)
   const board = useSelector(selectCurrentActiveBoard)
   const { boardId } = useParams()
 
   useEffect(() => {
     dispatch(fetchBoardDetailsAPI(boardId))
-    // fetchBoardDetailsAPI(boardId).then(board => {
-    //   // Sắp xếp thứ tự các column luôn ở đây trc khi đưa dữ liệu xuống bên dưới các component con (fix lỗi kéo card trong column bị nhảy sai thứ tự khi kéo lần đầu tiên)
-    //   board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
-
-    //   // Khi f5 trang web thì cần tạo column mới thì nó sẽ chưa có card, cần xử lý để kéo thả vào 1 column rỗng
-    //   board.columns.forEach(column => {
-    //     if (isEmpty(column.cards)) {
-    //       column.cards = [generatePlaceholderCard(column)]
-    //       column.cardOrderIds = [generatePlaceholderCard(column)._id]
-    //     } else {
-    //       column.cards = mapOrder(column.cards, column.cardOrderIds, '_id')
-    //     }
-    //   })
-    //   setBoard(board)
-    // })
   }, [dispatch, boardId])
 
   const moveColumns = (dndOrderedColumns) => {

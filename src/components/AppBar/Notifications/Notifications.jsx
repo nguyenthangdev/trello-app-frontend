@@ -32,14 +32,14 @@ const BOARD_INVITATION_STATUS = {
 
 function Notifications() {
   const currentUser = useSelector(selectCurrentUser)
+  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = useState(null)
-  // Biến state đơn giản để kiểm tra có thông báo mới hay không
+  // Biến state kiểm tra có thông báo mới hay không
   const [newNotification, setNewNotification] = useState(false)
   const open = Boolean(anchorEl)
 
   const handleClickNotificationIcon = (event) => {
     setAnchorEl(event.currentTarget)
-    // Khi click vào phần icon thông báo thì set lại trạng thái của biến newNotification về false
     setNewNotification(false)
   }
   const handleClose = () => {
@@ -51,7 +51,7 @@ function Notifications() {
 
   // Fetch danh sách các lời mời invitations
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+
   useEffect(() => {
     dispatch(fetchInvitationsAPI())
 
@@ -61,10 +61,11 @@ function Notifications() {
       if (invitation.inviteeId === currentUser._id) {
         // Thêm bản ghi invitation mới vào trong redux
         dispatch(addNotification(invitation))
-        // Cập nhật trạng thái đang có thông báo đến
+
         setNewNotification(true)
       }
     }
+
     // Lắng nghe 1 cái sự kiện real-time có tên là BE_USER_INVITED_TO_BOARD từ phía server gửi về
     socketIoInstance.on('BE_USER_INVITED_TO_BOARD', onReceiveNewInvitation)
 
@@ -77,7 +78,6 @@ function Notifications() {
   const updateBoardInvitation = (invitationId, status) => {
     dispatch(updateBoardInvitationAPI({ invitationId, status }))
       .then(res => {
-        console.log('res: ', res)
         if (res.payload?.boardInvitation?.status === BOARD_INVITATION_STATUS.ACCEPTED) {
           navigate(`/boards/${res.payload?.boardInvitation?.boardId}`)
         }
@@ -122,6 +122,7 @@ function Notifications() {
               overflowY: 'auto'
             }}>
               <Box sx={{ maxWidth: '100%', wordBreak: 'break-word', whiteSpace: 'pre-wrap', display: 'flex', flexDirection: 'column', gap: 1 }}>
+
                 {/* Nội dung của thông báo */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   <Box><GroupAddIcon fontSize="small" /></Box>
@@ -164,12 +165,12 @@ function Notifications() {
                   }
                 </Box>
 
-                {/* Thời gian của thông báo */}
                 <Box sx={{ textAlign: 'right' }}>
                   <Typography variant="span" sx={{ fontSize: '13px' }}>
                     {moment(notification.createdAt).format('llll')}
                   </Typography>
                 </Box>
+
               </Box>
             </MenuItem>
             {/* Cái đường kẻ Divider sẽ không cho hiện nếu là phần tử cuối */}
