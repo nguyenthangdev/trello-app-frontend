@@ -9,7 +9,7 @@ This is a trello website project. The project is built on ReactJs (Vite), JavaSc
 
 ## 1. Key Features
 
-The project has one part: front-end (Client).
+The project has one part: Front-end (Client).
 
 - Authentication:
 
@@ -55,6 +55,7 @@ The project has one part: front-end (Client).
 
 - Validator: react-hook-form
 --- 
+
 
 
 
