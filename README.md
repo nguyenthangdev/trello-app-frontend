@@ -54,12 +54,8 @@ The project has one part: front-end (Client).
 - Components: Material-UI (MUI) (for Skeletons, Menus, Dialogs)
 
 - Validator: react-hook-form
-
-2.3. Deployment
-
-- Frontend: Vercel (connected to the front-end directory and vercel.json for SPA routing)
-
 --- 
+
 
 
 
