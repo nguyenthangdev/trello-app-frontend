@@ -12,10 +12,10 @@ This is a trello website project. The project is built on ReactJs (Vite), JavaSc
 The project has one part: Front-end (Client).
 
 - Authentication:
-
-  - Registration and Login using bcrypt (password hashing) and JWT (JSON Web Token).
-
-  - Uses httpOnly cookies for accessToken and refreshToken, enhancing security (prevents XSS).
+  
+  - JWT-based authentication using httpOnly cookies for secure token storage.
+  
+  - Custom authorizeAxios with interceptor to handle access token expiration and automatic refresh flow.
 
 - Drag and Drop:
 
@@ -33,10 +33,8 @@ The project has one part: Front-end (Client).
  
 - Notification Real-time:
 
-  - Built real-time notification system with Socket.io.
- 
-  - Automatic authentication via httpOnly cookie on socket connection.
- 
+  - Built real-time notification system with socket.io-client.
+  
 ## 2. Tech Stack
 
 - Framework/Library: React 18, Vite
@@ -55,6 +53,7 @@ The project has one part: Front-end (Client).
 
 - Validator: react-hook-form
 --- 
+
 
 
 
