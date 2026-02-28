@@ -4,7 +4,7 @@ This is a trello website project. The project is built on ReactJs (Vite), JavaSc
 
 <img width="1918" height="1007" aapplt="Screenshot from 2026-02-28 17-12-45" src="https://github.com/user-attachments/assets/fca5a20a-912f-4044-bcd1-e873a62d4e76" />
 
-- Frontend Deploy (Vercel): [https://luxues-store.vercel.app]
+- Frontend Deploy (Vercel): [https://trello-web-application.vercel.app]
 ---
 
 ## 1. Key Features
@@ -37,26 +37,23 @@ The project has one part: front-end (Client).
 
 - Language: JavaScript
 
-- Styling: Tailwind CSS, Framer Motion (for animations)
+- Routing: React Router v6+
 
-- Routing: React Router v7+
-
-- State Management: React Context
+- State Management: Redux Toolkit
 
 - API Client: Axios
 
 - Real-time: Socket.io-client
 
-- Components: Material-UI (MUI) (for Skeletons, Menus, Dialogs), Swiper.js (for sliders)
+- Components: Material-UI (MUI) (for Skeletons, Menus, Dialogs)
 
-- Validator: Zod, react-hook-form
+- Validator: react-hook-form
 
 2.3. Deployment
 
 - Frontend: Vercel (connected to the front-end directory and vercel.json for SPA routing)
 
-- Backend: Render (connected to the back-end directory and running npm run build & npm run start)
-
 --- 
+
 
 
