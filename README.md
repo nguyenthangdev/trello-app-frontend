@@ -17,6 +17,12 @@ The project has one part: front-end (Client).
 
   - Uses httpOnly cookies for accessToken and refreshToken, enhancing security (prevents XSS).
 
+- Drag and Drop:
+
+  - Implemented drag-and-drop functionality for boards, columns, and cards.
+  
+  - Supports reordering columns within a board and moving cards between different columns.
+    
 - Search:
  
   - Real-time search suggestions (using debounce) directly under the search bar.
@@ -54,6 +60,7 @@ The project has one part: front-end (Client).
 - Frontend: Vercel (connected to the front-end directory and vercel.json for SPA routing)
 
 --- 
+
 
 
 
